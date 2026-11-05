@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -12,10 +13,11 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
+        /** @var User|null $user */
+        $user = $request->user();
 
         // Get normalized role
-        $roleName = $user ? $user->roleName() : 'siswa';
+        $roleName = ($user instanceof User) ? $user->roleName() : 'siswa';
 
         // Map role name to corresponding view partial
         $roleView = match ($roleName) {
@@ -26,7 +28,7 @@ class DashboardController extends Controller
             default => 'student',
         };
 
-        return view('pages.after_login.dasrboad', [
+        return view('dashboard', [
             'user' => $user,
             'roleView' => $roleView,
         ]);
