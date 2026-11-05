@@ -27,6 +27,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'role_id' => \App\Models\Role::firstOrCreate(['name' => 'siswa'])->id,
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
@@ -34,6 +35,46 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => null,
             'two_factor_confirmed_at' => null,
         ];
+    }
+
+    /**
+     * Indicate that the user is a super admin.
+     */
+    public function asSuperAdmin(): static
+    {
+        return $this->state(fn () => [
+            'role_id' => \App\Models\Role::firstOrCreate(['name' => 'super_admin'])->id,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a teacher.
+     */
+    public function asTeacher(): static
+    {
+        return $this->state(fn () => [
+            'role_id' => \App\Models\Role::firstOrCreate(['name' => 'guru'])->id,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a head of department (kaprodi).
+     */
+    public function asHod(): static
+    {
+        return $this->state(fn () => [
+            'role_id' => \App\Models\Role::firstOrCreate(['name' => 'kaprodi'])->id,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a student.
+     */
+    public function asStudent(): static
+    {
+        return $this->state(fn () => [
+            'role_id' => \App\Models\Role::firstOrCreate(['name' => 'siswa'])->id,
+        ]);
     }
 
     /**

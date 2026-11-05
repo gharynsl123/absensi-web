@@ -16,10 +16,10 @@ class RoleSeeder extends Seeder
         // create Super_admin, Kaprodi, Guru, Siswa
 
         $roles = [
-            'Super_admin',
-            'Kaprodi',
-            'Guru',
-            'Siswa',
+            'super_admin',
+            'kaprodi',
+            'guru',
+            'siswa',
         ];
 
         foreach ($roles as $roleName) {

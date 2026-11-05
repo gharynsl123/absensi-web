@@ -54,6 +54,7 @@ class UserSeeder extends Seeder
                         'name' => $student['name'],
                         'password' => Hash::make($student['password']),
                         'is_active' => true,
+                        'email_verified_at' => now(),
                         'updated_at' => now(),
                         'created_at' => now(),
                     ]
@@ -105,6 +106,7 @@ class UserSeeder extends Seeder
                         'name' => $teacher['name'],
                         'password' => Hash::make($teacher['password']),
                         'is_active' => true,
+                        'email_verified_at' => now(),
                         'updated_at' => now(),
                         'created_at' => now(),
                     ]
@@ -137,6 +139,7 @@ class UserSeeder extends Seeder
                     'name' => 'Anandagharyn Sinulingga',
                     'password' => Hash::make('superadmin'),
                     'is_active' => true,
+                    'email_verified_at' => now(),
                     'updated_at' => now(),
                     'created_at' => now(),
                 ]
